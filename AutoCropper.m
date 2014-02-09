@@ -1,4 +1,5 @@
 RGB = imread('hack.png');
+%RGB = imread('football.png');
 %RGB = imread('sand.png');
 %RGB = imread('people.png');
 %RGB = imread('cars.png');
@@ -8,7 +9,7 @@ I = rgb2gray(RGB);
 threshold = graythresh(I);
 bw = im2bw(I,threshold);
 
-%if true click on important point and press return to continue
+%if true click on important point(s) and press return to continue
 select_point = false;
 
 if select_point
@@ -40,11 +41,11 @@ bw = imfill(bw,'holes');
 object_size = round(x*y/25);  
 bw = bwareaopen(bw,object_size);
 
-%figure, imshow(bw), title('Pre-Cropped');
-
 if select_point 
         bw = bwselect(bw,[point_x],[point_y],8);
 end
+
+figure, imshow(bw), title('Pre-Cropped');
 
 vertical = any(bw, 2);
 horizontal = any(bw, 1);
